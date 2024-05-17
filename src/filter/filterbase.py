@@ -1,22 +1,11 @@
 from abc import ABC, abstractmethod
 
-class Filter(ABC):
+class FilterBase(ABC):
     
     @abstractmethod
-    def predict(self):
-        """ 
-        Prediction function for filters. 
-        Makes prediction using underlying process model.
-        """
+    def kalman_iteration(self, measurement):
         pass
-    
-    @abstractmethod
-    def update(self, measurement):
-        """
-        Make update to state using measurement
-        """
-        pass
-    
+        
     @property
     @abstractmethod
     def transition_model(self):
