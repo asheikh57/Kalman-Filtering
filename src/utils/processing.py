@@ -1,11 +1,7 @@
-from filter.filterbase import FilterBase
-from filter.adaptiveDenoiseKF import AdaptiveDenoiseKF
-from filter.denoiseKF import DenoiseKF
-from filter.hInfinityFilter import HInfinityFilter
-
+from filter import *
 from numpy import array, mean
 
-def run_filter(data : array, filter : FilterBase):
+def run_filter(data : array, filter):
     """
     Runs filter on data
     Args:
@@ -17,8 +13,8 @@ def run_filter(data : array, filter : FilterBase):
     """
     
     ret = []
-    for item in list:
-        filter.kalman_iteration(data)
+    for item in data:
+        filter.kalman_iteration(item)
         ret.append(filter.state)
         
     return array(ret)
@@ -48,3 +44,4 @@ def calculate_rmse(error : array):
     """
     
     return pow( mean( pow(error, 2) ) , 0.5)
+

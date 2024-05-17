@@ -1,4 +1,4 @@
-from denoiseKF import DenoiseKF
+from .denoiseKF import DenoiseKF
 from numpy.linalg import inv, multi_dot
 from numpy import array
 

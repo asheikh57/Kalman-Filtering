@@ -1,4 +1,4 @@
-from filterbase import FilterBase
+from .filterbase import FilterBase
 
 class DenoiseKF(FilterBase):
     def __init__(self, init_state : float, init_cov : float, sys_noise : float, proc_noise : float) -> None:

@@ -1,4 +1,4 @@
-from denoiseKF import DenoiseKF
+from .denoiseKF import DenoiseKF
 
 """
 Cited Work:
