@@ -17,16 +17,16 @@ class Filter(ABC):
         """
         pass
     
-    @abstractmethod
     @property
+    @abstractmethod
     def transition_model(self):
        """
        Get transition matrix that implements process model
        """
        pass
    
-    @abstractmethod
     @property
+    @abstractmethod
     def observation_model(self):
        """
        Get observation model matrix that connects measurements to state.

@@ -61,5 +61,7 @@ class DenoiseKF(Filter):
         
         self.cov -= kalman_gain * self.cov
         
-        
-    
+
+# Local file testing    
+if __name__ == "__main__":
+    print("hello")
