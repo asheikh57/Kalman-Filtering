@@ -1,5 +1,5 @@
 from denoiseKF import DenoiseKF
 
-class HInfinityFilter(FilterBase):
+class HInfinityFilter(DenoiseKF):
     def update(measurement):
         pass
