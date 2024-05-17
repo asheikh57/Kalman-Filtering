@@ -1,8 +1,8 @@
-from filterbase import Filter
+from filterbase import FilterBase
 
-class DenoiseKF(Filter):
+class DenoiseKF(FilterBase):
     def __init__(self, init_state : float, init_cov : float, sys_noise : float, proc_noise : float) -> None:
-        """_summary_
+        """
 
         Args:
             init_state (float): initial state estimate [1x1]
@@ -22,6 +22,8 @@ class DenoiseKF(Filter):
         Thus, all that occurs is adding noise into the state covariance, inherent to the inaccuracy of the model
         The point here is that derivatives of the state take the form of gaussian zero mean noise
         """
+        
+        # Increase uncertainty according to systemic noise
         self.cov += self.systemic_noise_variance
     
     @property
@@ -51,17 +53,36 @@ class DenoiseKF(Filter):
         Updates state with a measurement 
         """
         
+        # Calculate innovation, or pre-fit residual: an estimate of the error in the state estimate
         innovation = measurement - self.state
         
+        # Calculate innovation covariance, which determines uncertainty in the error in the state estimate
         innovation_covariance = self.cov + self.observation_noise_variance
         
+        # Calculate kalman gain, which essentially as a weighting
         kalman_gain = self.cov / innovation_covariance
         
+        # Update state based on weighting of state estimate and the measurement determined by kalman gain
         self.state += kalman_gain * innovation
         
+        # Update state covariance, or uncertainty
         self.cov -= kalman_gain * self.cov
+        
+    def kalman_iteration(self, measurement):
+        self.predict()
+        self.update(measurement)
+        
+    
         
 
 # Local file testing    
 if __name__ == "__main__":
-    print("hello")
+    def iterate(data : list):
+        kf = DenoiseKF(10, 10000, 0, 1000)
+        for item in data:
+            kf.predict()
+            kf.update(item)
+            print(kf.state)
+    data = [0 for i in range(1000)]
+    iterate(data)
+    
