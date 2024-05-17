@@ -19,19 +19,19 @@ def run_filter(data : array, filter):
         
     return array(ret)
 
-def calculate_error(data : array, filtered_data : array):
+def calculate_error(reference_data : array, filtered_data : array):
     """
     Calculates error at each data point
     Args:
-        data (array): numpy array containing input data
+        reference_data (array): numpy array containing reference data representative of "true" values
         filtered_data (array): numpy array containing filtered data
 
     Returns:
         (array): numpy array of error at each datapoint
     """
     
-    assert(len(filtered_data) == len(data))
-    return data - filtered_data
+    assert(len(filtered_data) == len(reference_data))
+    return reference_data - filtered_data
     
 def calculate_rmse(error : array):
     """
